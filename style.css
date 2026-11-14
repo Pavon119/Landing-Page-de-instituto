@@ -1,0 +1,774 @@
+/* 
+   VARIABLES Y CONFIGURACIÓN GLOBAL*/
+:root {
+    --primary-dark: #073B82;   /* Azul institucional oscuro */
+    --primary-main: #1267B5;   /* Azul principal */
+    --accent-sky: #55A9E8;     /* Celeste de acento */
+    --bg-light: #EAF4FC;       /* Celeste muy claro / Fondo */
+    --white: #FFFFFF;
+    --text-main: #1E293B;      /* Texto principal oscuro */
+    --text-muted: #64748B;     /* Texto secundario */
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px; 
+}
+
+body {
+    font-family: 'Inter', sans-serif, system-ui, -apple-system;
+    color: var(--text-main);
+    background-color: var(--white);
+    line-height: 1.6;
+    padding-top: 80px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding-top: 30px; /* Reduce el espacio con el Hero de 80px a solo 30px */
+    padding-bottom: 60px; /* Mantiene un espacio prudente abajo */
+}
+
+.bg-light {
+    background-color: var(--bg-light);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* 
+   BOTONES Y ESTADOS DE ACCESIBILIDAD FOCUS*/
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-main);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(18, 103, 181, 0.25);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(7, 59, 130, 0.35);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-main);
+}
+
+.btn-outline:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-main);
+}
+
+.btn-lg {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+}
+
+/* Estados focus-visible obligatorios para accesibilidad */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.mobile-toggle:focus-visible,
+.logo-box:focus-visible,
+.btn-whatsapp-link:focus-visible,
+.whatsapp-float:focus-visible {
+    outline: 3px solid var(--accent-sky);
+    outline-offset: 3px;
+}
+
+/* 
+   HEADER FIJO Y LOGOTIPO (Optimizado móvil) */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+    box-shadow: 0 4px 20px rgba(7, 59, 130, 0.12);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    border-radius: 6px;
+    max-width: 65%;
+}
+
+.logo-img {
+    height: 80px; /*  para mayor protagonismo y visibilidad */
+    width: 220px; /*  220px para mantener proporción con el nuevo alto */
+    object-fit: contain;
+}
+
+.logo-text-group {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.logo-text {
+    font-size: 1.1rem; /* Ligeramente ajustado para acompañar el tamaño del logo */
+    font-weight: 800;
+    color: var(--primary-dark);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logo-sub {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent-sky);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 
+   NAVEGACIÓN Y ACCIONES DEL HEADER */
+.nav-menu {
+    display: flex;
+    gap: 25px; /* Ligeramente más espacio entre los enlaces más grandes */
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;      /*  Actualizado a 600 para mayor presencia */
+    font-size: 1.05rem;    /*  Aumentado de 0.9rem a 1.05rem */
+    transition: var(--transition);
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-main);
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--primary-main);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Botón de la derecha (Contacto) más grande y destacado */
+.header-actions .btn {
+    padding: 12px 36px;    /*  Padding ampliado para hacerlo más grande */
+    font-size: 1.05rem;    /* Texto del botón más grande */
+    font-weight: 700;      /* Negrita fuerte para llamado a la acción */
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--primary-dark);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.mobile-toggle:hover {
+    color: var(--primary-main);
+    background-color: var(--bg-light);
+}
+/* 
+   HERO SECTION (Fondo institucional abstracto)*/
+.hero-section {
+    position: relative;
+    padding: 140px 20px 120px;
+    /* Capa azul sutil y limpia (20% y 10%) para que la foto del edificio se luzca real y nítida */
+    background: linear-gradient(135deg, rgba(7, 59, 130, 0.85) 0%, rgba(18, 103, 181, 0.10) 100%), url('assets/imagenes/hero.png');
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Patrón de puntos más suave para no ensuciar la foto de fondo */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.2; /* Reducido a la mitad para mayor claridad */
+}
+
+.hero-container-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Badge de la sede rediseñado con fondo sólido institucional para destacar de inmediato */
+.hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: rgba(7, 59, 130, 0.9); /* Azul institucional oscuro y sólido */
+    color: var(--accent-sky);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 25px;
+    border: 2px solid var(--accent-sky); /* Borde celeste brillante */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6); /* Sombra profunda para lectura perfecta */
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 35px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* 
+   SECCIÓN DE CARRERAS Y TARJETAS (Grid consistente) */
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 25px; /* Reducido de 50px a 25px para acercar todo */
+}
+
+.badge-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: var(--bg-light);
+    color: var(--primary-main);
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.section-header h2 {
+    font-size: 2.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.category-title {
+    font-size: 1.4rem;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.career-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(18, 103, 181, 0.1);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Altura visual consistente */
+}
+
+.career-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(7, 59, 130, 0.12);
+    border-color: var(--accent-sky);
+}
+
+.card-image-box {
+    width: 100%;
+    height: 180px;
+    background-color: var(--bg-light);
+    overflow: hidden;
+}
+
+.card-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adaptación sin deformaciones */
+    transition: transform 0.5s ease;
+}
+
+.career-card:hover .card-image-box img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-content h4 {
+    font-size: 1.15rem;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.career-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.career-meta {
+    font-size: 0.78rem;
+    color: var(--primary-main);
+    background-color: var(--bg-light);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.btn-card {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: var(--bg-light);
+    color: var(--primary-dark);
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+    margin-bottom: 8px;
+}
+
+.career-card:hover .btn-card {
+    background-color: var(--primary-main);
+    color: var(--white);
+}
+
+.btn-whatsapp-link {
+    display: block;
+    text-align: center;
+    color: var(--primary-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 4px;
+}
+
+.btn-whatsapp-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* 
+   FORMULARIO CONTAINER*/
+.form-container-box {
+    background-color: var(--white);
+    border: 2px dashed rgba(18, 103, 181, 0.3);
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/*
+   BOTÓN FLOTANTE DE WHATSAPP*/
+/* ESTILOS BASE GENERALES (Fuera de las media queries)  */
+.whatsapp-float {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #25D366 !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.8rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    z-index: 2147483647 !important;
+    text-decoration: none !important;
+    transition: transform 0.3s ease !important;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1) !important;
+    background-color: #20ba5a !important;
+}
+
+/* 
+   FOOTER*/
+.site-footer {
+    background-color: var(--primary-dark, #052c65); /* Tono institucional oscuro */
+    color: var(--white, #ffffff);
+    padding: 60px 0 20px;
+    margin-top: 60px;
+}
+
+.site-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Estructura de 3 columnas en Grid */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-col h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--accent-sky, #55a9e8);
+}
+
+.footer-col h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--accent-sky, #55a9e8);
+    position: relative;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+/* Logo del footer */
+.footer-logo {
+    height: 45px;
+    width: auto;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+
+/* Enlaces rápidos del footer */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-sky, #55a9e8);
+    padding-left: 5px; /* Sutil efecto de deslizamiento al pasar el mouse */
+}
+
+/* Redes sociales en el footer */
+.footer-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+    background-color: var(--accent-sky, #55a9e8);
+    color: var(--primary-dark, #052c65);
+    transform: translateY(-3px);
+}
+
+/* Barra inferior de derechos */
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+/* 
+   RESPONSIVE DESIGN (Pantallas medianas y chicas) */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr); /* Pasa a 2 columnas en tablets */
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Se apila en 1 sola columna en celulares */
+        text-align: center;
+    }
+
+    .footer-socials {
+        justify-content: center; /* Centra los íconos de redes en mobile */
+    }
+
+    .footer-links a:hover {
+        padding-left: 0; /* Desactiva el desplazamiento lateral en mobile */
+    }
+}
+
+/* 
+   PREFERENCE: REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/*
+   MEDIA QUERIES (Responsive Design)*/
+@media (max-width: 992px) {
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        padding: 30px 20px;
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.08);
+        border-top: 1px solid var(--bg-light);
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 2.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .logo-img {
+        height: 35px;
+    }
+
+    .logo-text {
+        font-size: 0.95rem;
+    }
+
+    .logo-sub {
+        font-size: 0.58rem;
+    }
+
+    .header-actions .btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .hero-section {
+        padding: 70px 15px 90px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+/*
+   REDES SOCIALES EN EL FOOTER*/
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    display: inline-flex;        /* flex para alinear ícono y texto */
+    align-items: center;
+    gap: 8px;                    /* Espacio entre el ícono y la palabra */
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;          /* Hereda el color del texto para cambiar al hacer hover */
+}
+
+.social-btn:hover {
+    background-color: var(--accent-sky);
+    color: var(--primary-dark);
+    border-color: var(--accent-sky);
+    transform: translateY(-2px);
+}
