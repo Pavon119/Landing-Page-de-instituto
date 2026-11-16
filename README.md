@@ -9,4 +9,4 @@ información institucional, canales de contacto directo y acceso rápido a redes
 * **JavaScript (Vanilla)** (Lógica del menú móvil interactivo, accesibilidad y efecto scroll)
 
 ## 🌐 Despliegue
-Proyecto alojado y optimizado para su visualización web mediante Vercel.
+Proyecto alojado y optimizado para su visualización web mediante Cloudflare Pages .
